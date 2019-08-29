@@ -1,0 +1,37 @@
+{% extends 'base.html' %} 
+
+{% load humanize %}
+
+{% block title %} | Welcome {% endblock %}
+
+{% block content %}
+<!-- Showcase -->
+  <section id="showcase">
+     <div class="container text-center">
+     <div class="jumbotron mt-5">
+      <h1 class="display-4">Welcome to 4G Dashboard</h1>
+      <p class="lead">
+        Digitize the Base of the Pyramid by providing a 
+        suite of financial services and business tools to 
+        connect the African informal economy to the world
+      </p>
+      <hr class="my-4">
+      <p>
+        Provide the best products and services 
+        for customer business growth.
+      </p>
+      <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-4">
+           <a class="btn btn-primary btn-block" href="{% url 'register' %}" role="button">Click to Sign Up</a>
+        </div>
+        <div class="col-lg-4">
+           <a class="btn btn-primary btn-block" href="{% url 'login' %}" role="button">Click to Login</a>
+        </div>
+        <div class="col-lg-2"></div>
+      </div>
+    </div>
+     </div>
+  </section>
+
+{% endblock %}
