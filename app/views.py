@@ -29,7 +29,8 @@ def dashboard(request):
 # plotly graph render
 def plotlygraph(request):
     context = {
-        'piechart': plots.pie_chart()
+        'piechart': plots.pie_chart(),
+        'bar': plots.bar_chart()
     }
     return render(request, 'pages/plotlygraph.html', context)
 
