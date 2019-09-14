@@ -1,11 +1,11 @@
 from plotly.offline import plot
 from .models import Account
 
-def pie_chart():
-    # intialize plotly value array and label array
-    plotly_values = []
-    ploltly_labels = []
+import plotly.graph_objects as go
 
+
+# reading data from db 
+def prepare_db_data(plotly_values: list, plotly_labels: list):
     # NOTE :
     """
     I did not want to read all data because they are all 
@@ -25,18 +25,27 @@ def pie_chart():
         # check weekly data type and append to the list
         if type(weekly_day) == list:
             for day in weekly_day:
-                ploltly_labels.append(day)
+                plotly_labels.append(day)
 
          # check transaction data type and append to the list
         if type(transaction) == list:
             for amount in transaction:
                 plotly_values.append(amount)
 
+
+def pie_chart():
+    # intialize plotly value array and label array
+    plotly_values = []
+    plotly_labels = []
+
+    # gettting data
+    prepare_db_data(plotly_values, plotly_labels)
+
     # preparing plotly graph 
     plotly_graph = {
        'data':  {
             "values": plotly_values,
-            "labels": ploltly_labels,
+            "labels": plotly_labels,
             "domain": {"column": 0},
             "name": "Weekly Day",
             "hoverinfo":"label+percent+name",
@@ -45,5 +54,18 @@ def pie_chart():
         },
     }
     plot_div = plot(plotly_graph, output_type='div',filename='donut')
+
+    return plot_div
+
+
+def bar_chart():
+    # intialize plotly value array and label array
+    plotly_values = []
+    plotly_labels = []
+
+    # gettting data
+    prepare_db_data(plotly_values, plotly_labels)
+
+    plot_div = plot(go.Figure([go.Bar(x=plotly_labels, y=plotly_values)]), output_type='div',filename='donut')
 
     return plot_div
